@@ -17,7 +17,7 @@ class CreateAuctionsTable extends Migration
             $table->increments('auction_id');
             $table->string('status');
             $table->string('title');
-            $table->date('year')->nullable();
+            $table->string('year')->nullable();
             $table->string('artist')->nullable();
             $table->string('style');
             $table->string('description');

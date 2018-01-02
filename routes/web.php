@@ -27,6 +27,6 @@ Route::get('/user/delete', 'UserController@delete');
 //auctions Routes
 Route::get('/auctions/myauctions','AuctionController@openMyAuctionsPage');
 Route::get('/auctions/new','AuctionController@newAuction');
-Route::get('/auctions/add','AuctionController@addAuction');
+Route::post('/auctions/add','AuctionController@addAuction');
 
 });

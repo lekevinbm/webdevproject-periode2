@@ -17,7 +17,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form class="form-horizontal" method="POST" action="/auctions/add">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/auctions/add">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
@@ -128,7 +128,7 @@
                             <label for="optionalImage" class="col-md-4 control-label">Optional image</label>
 
                             <div class="col-md-6">
-                                <input id="optionalImage" type="file" class="form-control" name="optionalImage" required autofocus>
+                                <input id="optionalImage" type="file" class="form-control" name="optionalImage" autofocus>
                             </div>
                         </div>
                         
@@ -161,7 +161,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    Add Auction
                                 </button>
                             </div>
                         </div>

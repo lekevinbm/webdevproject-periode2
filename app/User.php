@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function auction(){
-        return $this->hasMany('App\Auction', 'auction_id');
+    public function auctions(){
+        return $this->hasMany('App\Auction', 'owner_id');
     }
 }

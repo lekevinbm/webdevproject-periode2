@@ -12,4 +12,8 @@ class Auction extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function photos(){
+        return $this->hasMany('App\Photo', 'auction_id');
+    }
 }

@@ -26,7 +26,6 @@ class CreateAuctionsTable extends Migration
             $table->float('width');
             $table->float('height');
             $table->float('depth')->nullable();
-            $table->datetime('startDateTime');
             $table->datetime('endDateTime');
             $table->float('minEstimatePrice');
             $table->float('maxEstimatePrice');

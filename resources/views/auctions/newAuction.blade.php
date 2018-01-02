@@ -80,7 +80,7 @@
                             <label for="year" class="col-md-4 control-label">Year</label>
 
                             <div class="col-md-6">
-                                <input id="year" type="number" step="1" class="form-control" name="year" value="{{ old('year') }}" required>
+                                <input id="year" type="text" class="form-control" name="year" value="{{ old('year') }}" required>
                             </div>
                         </div>
 
@@ -132,16 +132,6 @@
                             </div>
                         </div>
                         
-                                  
-                        
-                        <div class="form-group{{ $errors->has('startDateTime') ? ' has-error' : '' }}">
-                            <label for="startDateTime" class="col-md-4 control-label">Start of bidding</label>
-
-                            <div class="col-md-6">
-                                <input id="startDateTime" type="datetime-local" class="form-control" name="startDateTime" value="{{ old('startDateTime') }}" required autofocus>
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('endDateTime') ? ' has-error' : '' }}">
                             <label for="endDateTime" class="col-md-4 control-label">End of bidding</label>
 

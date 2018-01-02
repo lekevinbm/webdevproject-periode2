@@ -23,8 +23,8 @@ class CreateAuctionsTable extends Migration
             $table->string('description');
             $table->string('condition');
             $table->string('origin');
-            $table->float('width')->nullable();
-            $table->float('height')->nullable();
+            $table->float('width');
+            $table->float('height');
             $table->float('depth')->nullable();
             $table->datetime('startDateTime');
             $table->datetime('endDateTime');
@@ -33,7 +33,7 @@ class CreateAuctionsTable extends Migration
             $table->integer('owner_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('owner_id')->references('user_id')
+            $table->foreign('owner_id')->references('id')
             ->on('users')
             ->onDelete('cascade');
         });

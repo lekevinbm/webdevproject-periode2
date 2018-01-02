@@ -24,7 +24,7 @@ class UserController extends Controller
      * Open the page to edit the user.
      */
     public function openEditPage(){
-        return view('user.edit');
+        return view('user.editUser');
     }
 
     /**

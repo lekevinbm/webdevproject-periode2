@@ -23,4 +23,10 @@ Route::get('/user', 'UserController@index');
 Route::get('/user/edit', 'UserController@openEditPage');
 Route::post('/user/edit', 'UserController@edit');
 Route::get('/user/delete', 'UserController@delete');
+
+//auctions Routes
+Route::get('/auctions/myauctions','AuctionController@openMyAuctionsPage');
+Route::get('/auctions/new','AuctionController@newAuction');
+Route::get('/auctions/add','AuctionController@addAuction');
+
 });

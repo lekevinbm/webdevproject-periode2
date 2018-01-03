@@ -77,63 +77,52 @@ class AuctionController extends Controller
 
             //Artwork Image
             $artworkImage = $data->artworkImage;
-            $photo = new Photo;
-            $img = Image::make($artworkImage);
-            $img = $img->resize(400, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-
-            $extension = pathinfo(storage_path().$artworkImage->getClientOriginalName(), PATHINFO_EXTENSION);
-            $img = $img->stream();               
-            $filename = 'public/auctions/' . $auction_id .'/artworkImage.' .$extension;
-            Storage::disk('local')->put($filename, $img);
-            $photo->path = Storage::url($filename);
-            $photo->type = 'Artwork Image';
-            $photo->title = 'Image of '.$data['title'].' from '.$data['artist'];
-            $photo->auction_id = $auction_id;
-            $photo->save();
+            $type = 'Artwork Image';
+            $this->saveAuctionImage($artworkImage, $auction_id, $type, $data);
 
             //Signature Image
             $signatureImage = $data->signatureImage;
-            $photo = new Photo;
-            $img = Image::make($signatureImage);
-            $img = $img->resize(400, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-
-            $extension = pathinfo(storage_path().$signatureImage->getClientOriginalName(), PATHINFO_EXTENSION);
-            $img = $img->stream();               
-            $filename = 'public/auctions/' . $auction_id .'/signatureImage.' .$extension;
-            Storage::disk('local')->put($filename, $img);
-            $photo->path = Storage::url($filename);
-            $photo->type = 'Signature Image';
-            $photo->title = 'Signature Image of '.$data['title'].' from '.$data['artist'];
-            $photo->auction_id = $auction_id;
-            $photo->save();
+            $type = 'Signature Image';
+            $this->saveAuctionImage($signatureImage, $auction_id, $type, $data);
 
             $optionalImage = $data->optionalImage;            
             if($optionalImage){
-                $photo = new Photo;
-                $img = Image::make($optionalImage);
-                $img = $img->resize(400, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-
-                $extension = pathinfo(storage_path().$optionalImage->getClientOriginalName(), PATHINFO_EXTENSION);
-                $img = $img->stream();               
-                $filename = 'public/auctions/' . $auction_id .'/optionalImage.' .$extension;
-                Storage::disk('local')->put($filename, $img);
-                $photo->path = Storage::url($filename);
-                $photo->type = 'Optional Image';
-                $photo->title = 'Image of '.$data['title'].' from '.$data['artist'];
-                $photo->auction_id = $auction_id;
-                $photo->save();
+                $type = 'Optional Image';
+                $this->saveAuctionImage($optionalImage, $auction_id, $type, $data);
             }
             return redirect('/auctions/myauctions');
         }
         return Redirect::back()->withErrors($validator);
+    }
+
+    public function saveAuctionImage($image,$auction_id, $type, $data){
+        $photo = new Photo;
+        $img = Image::make($image);
+        $img = $img->resize(400, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $extension = pathinfo(storage_path().$image->getClientOriginalName(), PATHINFO_EXTENSION);
+        $img = $img->stream();               
+        $filename = 'public/auctions/' . $auction_id . '/'.str_replace(' ', '', $type).'.'.$extension;
+        Storage::disk('local')->put($filename, $img);
+        $photo->path = Storage::url($filename);
+        $photo->type = $type;
+        if($type == 'Signature Image'){
+            $photo->title = $type.' of '.$data['title'].' from '.$data['artist'];
+        }else{
+            $photo->title = 'Image of '.$data['title'].' from '.$data['artist'];
+        }
+            
+        $photo->auction_id = $auction_id;
+        $photo->save();
+    }
+
+     /**
+     * Add a new auction.
+     */
+    public function openAuction($auction_id){
+        return view('auctions.openAuction', [ 'auction' => Auction::find($auction_id) ]);
+
     }
 }

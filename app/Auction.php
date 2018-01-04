@@ -16,4 +16,8 @@ class Auction extends Model
     public function photos(){
         return $this->hasMany('App\Photo', 'auction_id');
     }
+    
+    public function watchItems(){
+        return $this->hasMany('App\WatchItem', 'auction_id');
+    }
 }

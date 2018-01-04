@@ -11,7 +11,7 @@
                 @if( $auction->status == "active")
                     <div class="row">
                         <div class="col-md-5">
-                            <a href="/auctions/open/{{ $auction->auction_id }}"><img src="{{ $auction->photos()->where('type', 'Artwork Image')->first()['path'] }}"></a>
+                            <a href="/auctions/{{ $auction->auction_id }}"><img src="{{ $auction->photos()->where('type', 'Artwork Image')->first()['path'] }}"></a>
                             
                         </div>
                         <div class="col-md-5">

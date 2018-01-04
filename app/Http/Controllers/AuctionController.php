@@ -95,6 +95,9 @@ class AuctionController extends Controller
         return Redirect::back()->withErrors($validator);
     }
 
+    /**
+     * Saves the photos of auctions localy and in the database .
+     */
     public function saveAuctionImage($image,$auction_id, $type, $data){
         $photo = new Photo;
         $img = Image::make($image);
@@ -122,7 +125,7 @@ class AuctionController extends Controller
      * Add a new auction.
      */
     public function openAuction($auction_id){
+        //dd(empty( Auction::find($auction_id)->watchItems()->where('user_id', Auth::id())->first() ));
         return view('auctions.openAuction', [ 'auction' => Auction::find($auction_id) ]);
-
     }
 }

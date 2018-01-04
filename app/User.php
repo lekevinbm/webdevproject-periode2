@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function auctions(){
         return $this->hasMany('App\Auction', 'owner_id');
     }
+
+    public function watchItems(){
+        return $this->hasMany('App\WatchItem', 'user_id');
+    }
 }

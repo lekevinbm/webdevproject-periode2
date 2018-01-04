@@ -27,9 +27,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/auctions/myauctions','AuctionController@openMyAuctionsPage');
     Route::get('/auctions/new','AuctionController@newAuction');
     Route::post('/auctions/add','AuctionController@addAuction');
-    Route::get('/auctions/open/{id}','AuctionController@openAuction');
+    Route::get('/auctions/{id}','AuctionController@openAuction');
 
     //watchlist Routes
+    Route::get('/watchlist','WatchlistController@showWatchlist');
     Route::get('/watchlist/add/{id}','WatchlistController@addToWatchlist');
+    Route::get('/watchlist/remove/{id}','WatchlistController@removeFromWatchlist');
+    Route::get('/watchlist/clear','WatchlistController@clearWatchlist');
 
 });

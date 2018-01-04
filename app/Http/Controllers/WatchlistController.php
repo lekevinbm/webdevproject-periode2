@@ -15,7 +15,6 @@ class WatchlistController extends Controller
      * Opens the watchlistPage.
      */
     public function showWatchlist(){
-        //dd(Auth::user()->watchItems()->get()->first()->auction->first()->title);
         return view('auctions.watchlist',[
             'watchItems' => Auth::user()->watchItems()->get(),
         ]);
@@ -50,6 +49,7 @@ class WatchlistController extends Controller
 
         
     }
+
     /**
      * Checks if the the auction is alreadt in WatchList, to prevent double watchitems.
      */
@@ -59,5 +59,31 @@ class WatchlistController extends Controller
             return True;
         }
         return False;
+    }
+
+    /**
+     * Clears a user's watchlist.
+     */
+    public function clearWatchList(){
+        Auth::user()->watchItems()->delete();
+        return Redirect::back();
+    }
+
+    /**
+     * Remove selected auctions from watchlist.
+     */
+    public function removeSelectedFromWatchlist(Request $data){
+        $validator = Validator::make($data->all(), [
+            'auctionsToDelete.*' => 'required|numeric'
+        ]);
+        if ($validator->passes()) {
+            foreach($data->auctionsToDelete as $key => $auction_id){
+                if($this->isWatchItemInWatchList($auction_id)){
+                    $watchItem = WatchItem::where('auction_id',$auction_id)->where('user_id',Auth::id());
+                    $watchItem->delete();  
+                }                
+            }
+        }
+        return Redirect::back();
     }
 }

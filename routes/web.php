@@ -34,5 +34,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/watchlist/add/{id}','WatchlistController@addToWatchlist');
     Route::get('/watchlist/remove/{id}','WatchlistController@removeFromWatchlist');
     Route::get('/watchlist/clear','WatchlistController@clearWatchlist');
+    Route::post('/watchlist/remove','WatchlistController@removeSelectedFromWatchlist');
 
 });

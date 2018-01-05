@@ -20,4 +20,8 @@ class Auction extends Model
     public function watchItems(){
         return $this->hasMany('App\WatchItem', 'auction_id');
     }
+
+    public function bids(){
+        return $this->hasMany('App\Bid', 'auction_id');
+    }
 }

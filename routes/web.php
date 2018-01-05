@@ -36,4 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/watchlist/clear','WatchlistController@clearWatchlist');
     Route::post('/watchlist/remove','WatchlistController@removeSelectedFromWatchlist');
 
+    //bids
+    Route::post('/bids/add/{id}','BidController@addBid');
+
 });

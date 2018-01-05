@@ -10,11 +10,11 @@
             @foreach ($myauctions as $key => $auction)
                 @if( $auction->status == "active")
                     <div class="row">
-                        <div class="col-md-5">
-                            <a href="/auctions/{{ $auction->auction_id }}"><img src="{{ $auction->photos()->where('type', 'Artwork Image')->first()['path'] }}"></a>
+                        <div class="col-md-3">
+                            <a href="/auctions/{{ $auction->auction_id }}"><img style="width:100px" src="{{ $auction->photos()->where('type', 'Artwork Image')->first()['path'] }}"></a>
                             
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                         {{ $auction->title }}
                         </div>
                     </div>                    

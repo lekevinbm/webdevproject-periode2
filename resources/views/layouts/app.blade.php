@@ -77,7 +77,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="/">HOME</a></li>
-                        <li><a href="/art">ART</a></li>
+                        <li><a href="/auctions">ART</a></li>
                         <li><a href="/isearch">ISEARCH</a></li>
                         <li><a href="/auctions/myauctions">MYAUCTIONS</a></li>
                         <li><a href="/bids/mybids">MYBIDS</a></li>

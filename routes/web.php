@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/auctions','AuctionController@overview');
+Route::get('/auctions/sortby/{id}','AuctionController@sortAuctionBy');
 Route::get('/auctions/open/{id}','AuctionController@openAuction');
 
 Auth::routes();

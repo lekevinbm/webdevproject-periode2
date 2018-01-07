@@ -10,9 +10,45 @@ use App\Photo;
 use Validator;
 use Auth;
 use Redirect;
+use Carbon;
 
 class AuctionController extends Controller
 {
+    /**
+     * Open the overview of all auctions for sale.
+     */
+    public function overview(){
+        
+        return view('auctions.overview',[
+            'auctions' => Auction::where('status','active')->get(),
+        ]);
+    }
+
+    public function sortAuctionBy($sortOption){
+
+        if($sortOption == "ending-soonest"){
+            $auctions = Auction::where('status','active')->orderBy('endDateTime', 'asc')->get();
+        }
+        if($sortOption == "ending-latest"){
+            $auctions = Auction::where('status','active')->orderBy('endDateTime', 'desc')->get();
+        }
+        if($sortOption == "newest"){
+            $auctions = Auction::where('status','active')->latest()->get();
+        }
+        if($sortOption == "popularity"){
+                $auctions = Auction::leftJoin('bids', 'bids.auction_id', '=', 'auctions.auction_id')
+                ->orderBy('bids_count','desc')
+                ->selectRaw('auctions.*, count(bids.bid_id) as bids_count')
+                ->groupBy('auctions.auction_id')
+                ->having('auctions.status','active')               
+                ->get();
+        }
+
+        return view('auctions.overview',[
+            'auctions' => $auctions,
+        ]);
+    }
+    
     /**
      * Open My auction the page.
      */
@@ -57,9 +93,9 @@ class AuctionController extends Controller
             'minEstimatePrice' => 'required|numeric|min:0',
             'maxEstimatePrice' => 'required|numeric|min:0',
             'buyOutPrice' => 'nullable|numeric|min:0',
-            'artworkImage' => 'required|image',
-            'signatureImage' => 'required|image',
-            'optionalImage' => 'nullable|image',
+            'artworkImage' => 'required|image|max:10240',
+            'signatureImage' => 'required|image|max:10240',
+            'optionalImage' => 'nullable|image|max:10240',
         ]);
 
         if ($validator->passes()) { 

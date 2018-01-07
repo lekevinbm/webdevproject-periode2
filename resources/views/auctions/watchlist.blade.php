@@ -16,7 +16,7 @@
                                     <input type="checkbox" name="auctionsToDelete[]" value="{{$watchItem->auction->auction_id}}">
                                 </div>                            
                                 <div class="col-md-3">
-                                    <a href="/auctions/{{ $watchItem->auction->auction_id }}"><img style="width:100px" src="{{ $watchItem->auction->photos()->where('type', 'Artwork Image')->first()['path'] }}"></a>
+                                    <a href="/auctions/open/{{ $watchItem->auction->auction_id }}"><img style="width:100px" src="{{ $watchItem->auction->photos()->where('type', 'Artwork Image')->first()['path'] }}"></a>
                                 </div>
                                 <div class="col-md-3">
                                     {{ $watchItem->auction->title }}

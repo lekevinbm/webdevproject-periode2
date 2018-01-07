@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'city' => 'required|string',
             'country' => 'required|string',
             'phoneNumber' => 'required|string',
-            'VAT_number' => 'string',
+            'VAT_number' => 'nullable|string',
             'accountNumber' => 'required|string',
         ]);
     }

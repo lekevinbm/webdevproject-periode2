@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('width') ? ' has-error' : '' }}">
-                            <label for="width" class="col-md-4 control-label">Width</label>
+                            <label for="width" class="col-md-4 control-label">Width (in cm)</label>
 
                             <div class="col-md-6">
                                 <input id="width" type="number" sterp="0.01" min="0" class="form-control" name="width" value="{{ old('width') }}" required autofocus>
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('height') ? ' has-error' : '' }}">
-                            <label for="height" class="col-md-4 control-label">Height</label>
+                            <label for="height" class="col-md-4 control-label">Height (in cm)</label>
 
                             <div class="col-md-6">
                                 <input id="height" type="number" step="0.01" min="0" class="form-control" name="height" value="{{ old('height') }}" autofocus>
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('depth') ? ' has-error' : '' }}">
-                            <label for="depth" class="col-md-4 control-label">Depth (optional)</label>
+                            <label for="depth" class="col-md-4 control-label">Depth (in cm - optional)</label>
 
                             <div class="col-md-6">
                                 <input id="depth" type="number" step="0.01" min="0" class="form-control" name="depth" value="{{ old('depth') }}" autofocus>

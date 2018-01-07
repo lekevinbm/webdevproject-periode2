@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/auctions/{id}','AuctionController@openAuction');
+Route::get('/auctions/open/{id}','AuctionController@openAuction');
 
 Auth::routes();
 
@@ -39,5 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //bids
     Route::post('/bids/add/{id}','BidController@addBid');
+    Route::get('/bids/mybids','BidController@showMybids');
 
 });

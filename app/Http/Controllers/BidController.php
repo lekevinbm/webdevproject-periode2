@@ -11,6 +11,15 @@ use Redirect;
 
 class BidController extends Controller
 {
+     /**
+     * Opens the mybids page.
+     */
+    public function showMybids(){
+        return view('bids.mybids',[
+            'mybids' => Auth::user()->bids()->get(),
+        ]);
+    }
+
     /**
      * Adds the user's bid on an auction.
      */

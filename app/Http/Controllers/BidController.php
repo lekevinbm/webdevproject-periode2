@@ -15,35 +15,47 @@ class BidController extends Controller
      * Adds the user's bid on an auction.
      */
     public function addBid(Request $data, $auction_id){
-        $highestBid = $this->giveHighestBid();
-        $validator = Validator::make($data->all(), [
-            'bid' => 'required|numeric|min:0'
-        ]);
-        if ($validator->passes()) {
-            if($highestBid){
-                if($data->bid > $highestBid->bidPrice){
-                    $bid = new Bid;
-                    $bid->user_id = Auth::id();
-                    $bid->auction_id = $auction_id;
-                    $bid->bidPrice = $data->bid;
-                    $bid->save();
-                    return Redirect::back()->with('bidStatus', ['success','Your bid of '.$data->bid.' euro has been succesfully placed.']);
-                }else{
-                    return Redirect::back()->with('bidStatus', ['failed','You have to bid higher than '.$highestBid->bidPrice.' euro (the highest bidder).']);
+        if ($this->isAuctionForSale($auction_id)){
+            $highestBid = $this->giveHighestBid();
+            $validator = Validator::make($data->all(), [
+                'bid' => 'required|numeric|min:0'
+            ]);
+            if ($validator->passes()) {
+                if($highestBid){
+                    if($data->bid > $highestBid->bidPrice){
+                        $bid = new Bid;
+                        $bid->user_id = Auth::id();
+                        $bid->auction_id = $auction_id;
+                        $bid->bidPrice = $data->bid;
+                        $bid->save();
+                        return Redirect::back()->with('bidStatus', ['success','Your bid of '.$data->bid.' euro has been succesfully placed.']);
+                    }else{
+                        return Redirect::back()->with('bidStatus', ['failed','You have to bid higher than '.$highestBid->bidPrice.' euro (the highest bidder).']);
+                    }
                 }
-            }
 
-            $bid = new Bid;
-            $bid->user_id = Auth::id();
-            $bid->auction_id = $auction_id;
-            $bid->bidPrice = $data->bid;
-            $bid->save();
-            return Redirect::back()->with('bidStatus', ['success','Your bid of '.$data->bid.' euro has been succesfully placed.']);
+                $bid = new Bid;
+                $bid->user_id = Auth::id();
+                $bid->auction_id = $auction_id;
+                $bid->bidPrice = $data->bid;
+                $bid->save();
+                return Redirect::back()->with('bidStatus', ['success','Your bid of '.$data->bid.' euro has been succesfully placed.']);
+            }
+            return Redirect::back()->withErrors($validator);
         }
-        return Redirect::back()->withErrors($validator);
+        return redirect('/');
     }
 
     public function giveHighestBid(){
         return Bid::orderBy('bidPrice', 'desc')->take(1)->first();
+    }
+
+    public function isAuctionForSale($auction_id){
+        $auction = Auction::find($auction_id)->first();
+        if($auction->status == "active")
+        {
+            return True;
+        }
+        return FALSE;
     }
 }

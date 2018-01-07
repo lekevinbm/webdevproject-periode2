@@ -10,6 +10,7 @@
             <img style="height:50%" src="{{ $auction->photos->where('type', 'Artwork Image')->first()->path }}">
         </div>
         <div class="col-md-4">
+            <a href="/auctions/buy/{{ $auction->auction_id }}">Buy now for !! euro</a>
             <p>bids: {{ $auction->bids->count() }}           
             </p>
             @if (session('bidStatus'))

@@ -24,6 +24,13 @@ class AuctionController extends Controller
     }
 
      /**
+     * Open an auction page.
+     */
+    public function openAuction($auction_id){
+        return view('auctions.openAuction', [ 'auction' => Auction::find($auction_id) ]);
+    }
+
+     /**
      * Open new auction form.
      */
     public function newAuction(){
@@ -49,6 +56,7 @@ class AuctionController extends Controller
             'endDateTime' => 'required|date',
             'minEstimatePrice' => 'required|numeric|min:0',
             'maxEstimatePrice' => 'required|numeric|min:0',
+            'buyOutPrice' => 'nullable|numeric|min:0',
             'artworkImage' => 'required|image',
             'signatureImage' => 'required|image',
             'optionalImage' => 'nullable|image',
@@ -69,6 +77,7 @@ class AuctionController extends Controller
             $auction->endDateTime = $data['endDateTime'];
             $auction->minEstimatePrice = $data['minEstimatePrice'];
             $auction->maxEstimatePrice = $data['maxEstimatePrice'];
+            $auction->buyOutPrice = $data['buyOutPrice'];
             $auction->status = 'active';
             $auction->owner_id = Auth::id();
             $auction->save();
@@ -122,10 +131,13 @@ class AuctionController extends Controller
     }
 
      /**
-     * Add a new auction.
+     * Buy an auction and give thank you page.
      */
-    public function openAuction($auction_id){
-        //dd(empty( Auction::find($auction_id)->watchItems()->where('user_id', Auth::id())->first() ));
-        return view('auctions.openAuction', [ 'auction' => Auction::find($auction_id) ]);
+    public function buyAuction($auction_id){
+        $auction = Auction::find($auction_id);
+        $auction->status = "sold";
+        $auction->save();
+        return view('auctions.thankYou', [ 'auction' => Auction::find($auction_id) ]);
     }
+    
 }

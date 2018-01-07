@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/auctions/{id}','AuctionController@openAuction');
 
 Auth::routes();
 
@@ -26,8 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
     //auctions Routes
     Route::get('/auctions/myauctions','AuctionController@openMyAuctionsPage');
     Route::get('/auctions/new','AuctionController@newAuction');
-    Route::post('/auctions/add','AuctionController@addAuction');
-    Route::get('/auctions/{id}','AuctionController@openAuction');
+    Route::post('/auctions/add','AuctionController@addAuction');    
+    Route::get('/auctions/buy/{id}','AuctionController@buyAuction');
 
     //watchlist Routes
     Route::get('/watchlist','WatchlistController@showWatchlist');

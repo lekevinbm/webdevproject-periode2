@@ -156,6 +156,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('buyOutPrice') ? ' has-error' : '' }}">
+                            <label for="buyOutPrice" class="col-md-4 control-label">Buyout Price</label>
+
+                            <div class="col-md-6">
+                                <input id="buyOutPrice" type="number" step="0.01" min="0" class="form-control" name="buyOutPrice" value="{{ old('buyOutPrice') }}" autofocus>
+                            </div>
+                        </div>
+
                         
 
                         <div class="form-group">

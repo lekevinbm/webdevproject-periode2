@@ -29,6 +29,7 @@ class CreateAuctionsTable extends Migration
             $table->datetime('endDateTime');
             $table->float('minEstimatePrice');
             $table->float('maxEstimatePrice');
+            $table->float('buyOutPrice')->nullable();
             $table->integer('owner_id')->unsigned();
             $table->timestamps();
 

@@ -32,6 +32,13 @@
                                     <option value="Conceptual">Conceptual</option>
                                     <option value="Contemporary">Contemporary</option>
                                     <option value="Emerging Artist">Emerging Artist</option>
+                                    <option value="Figurative">Figurative</option>
+                                    <option value="Middle Easter Contemporary">Middle Easter Contemporary</option>
+                                    <option value="Minimalism">Minimalism</option>
+                                    <option value="Modern">Modern</option>
+                                    <option value="Pop">Pop</option>
+                                    <option value="Urban">Urban</option>
+                                    <option value="Vintage Photographs">Vintage Photographs</option>
                                 </select>
                             </div>
                         </div>

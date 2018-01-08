@@ -201,13 +201,75 @@ class FilterController extends Controller
         }
 
         if($continueFilter ){
-            //return $auctions->get();
             return view('auctions.overview',[
                 'auctions' => $auctions->get(),
             ]);
         }
         return redirect('/auctions');         
         
+    }
+
+    public function deleteAFilter(Request $request, $filterToDelete){
+        $filterOption = explode("-",$filterToDelete);
+        if ($filterOption[0] == 'price'){            
+            if ( $filterOption[1] == 'between' && is_numeric($filterOption[2]) && is_numeric($filterOption[4])){
+                $request->session()->forget('filter.price.between.'.$filterOption[2].'-'.$filterOption[4]);                   
+            }
+        }
+
+        if( $filterOption[0] == 'price' && $filterOption[1] == 'above'){
+            $request->session()->forget('filter.price.above');
+        }
+
+        if ( $filterOption[0] == 'ending' && $filterOption[1] == 'thisweek'){
+            $request->session()->forget('filter.ending.thisweek');
+        }
+
+        if ($filterOption[0] == 'ending' && $filterOption[1] == 'purchasenow'){
+            $request->session()->forget('filter.ending.purchasenow');
+        }
+
+        if ( $filterOption[0] == 'prewar'){
+            $request->session()->forget('filter.prewar');
+        }
+
+        if ( $filterOption[0] == 'yearbetween' && is_numeric($filterOption[1]) && is_numeric($filterOption[2])){
+            $request->session()->forget('filter.yearbetween.'.$filterOption[1].'-'.$filterOption[2]);
+        }
+
+        if ( $filterOption[0] == 'yearabove'){
+            $request->session()->forget('filter.yearabove');
+        }
+
+        if ( $filterOption[0] == 'style'){
+            $request->session()->forget('filter.style.'.$filterOption[1]);
+        }
+        
+        if(!session('filter.price.between')){
+            $request->session()->forget('filter.price.between');
+        }
+        if(!session('filter.price')){
+            $request->session()->forget('filter.price');
+        }
+
+        if(!session('filter.ending')){
+                $request->session()->forget('filter.ending');
+        }
+
+        if(!session('filter.yearbetween')){
+            $request->session()->forget('filter.yearbetween');
+        }
+
+        if(!session('filter.style')){
+            $request->session()->forget('filter.style');
+        }
+
+        if(!session('filter')){
+            $request->session()->forget('filter');
+        }
+
+        return redirect('/auctions/filter/sorted');
+
     }
 
     public function deleteAllFilters(Request $request){

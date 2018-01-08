@@ -30,7 +30,7 @@
                                     <option value="African American">African American</option>
                                     <option value="Asian Contemporary">Asian Contemporary</option>
                                     <option value="Conceptual">Conceptual</option>
-                                    <option value="Conteporary">Conteporary</option>
+                                    <option value="Contemporary">Contemporary</option>
                                     <option value="Emerging Artist">Emerging Artist</option>
                                 </select>
                             </div>
@@ -80,7 +80,7 @@
                             <label for="year" class="col-md-4 control-label">Year</label>
 
                             <div class="col-md-6">
-                                <input id="year" type="text" class="form-control" name="year" value="{{ old('year') }}" required>
+                                <input id="year" type="number" sterp="1" class="form-control" name="year" value="{{ old('year') }}" required>
                             </div>
                         </div>
 

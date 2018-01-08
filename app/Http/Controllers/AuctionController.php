@@ -10,42 +10,21 @@ use App\Photo;
 use Validator;
 use Auth;
 use Redirect;
-use Carbon;
 
 class AuctionController extends Controller
 {
     /**
      * Open the overview of all auctions for sale.
      */
-    public function overview(){
-        
+    public function overview(Request $request){
+        if(session('filter')){
+            $request->session()->forget('filter');
+        }
+        if(session('sortby')){
+            $request->session()->forget('sortby');
+        }        
         return view('auctions.overview',[
             'auctions' => Auction::where('status','active')->get(),
-        ]);
-    }
-
-    public function sortAuctionBy($sortOption){
-
-        if($sortOption == "ending-soonest"){
-            $auctions = Auction::where('status','active')->orderBy('endDateTime', 'asc')->get();
-        }
-        if($sortOption == "ending-latest"){
-            $auctions = Auction::where('status','active')->orderBy('endDateTime', 'desc')->get();
-        }
-        if($sortOption == "newest"){
-            $auctions = Auction::where('status','active')->latest()->get();
-        }
-        if($sortOption == "popularity"){
-                $auctions = Auction::leftJoin('bids', 'bids.auction_id', '=', 'auctions.auction_id')
-                ->orderBy('bids_count','desc')
-                ->selectRaw('auctions.*, count(bids.bid_id) as bids_count')
-                ->groupBy('auctions.auction_id')
-                ->having('auctions.status','active')               
-                ->get();
-        }
-
-        return view('auctions.overview',[
-            'auctions' => $auctions,
         ]);
     }
     
@@ -80,7 +59,7 @@ class AuctionController extends Controller
 
         $validator = Validator::make($data->all(), [
             'title' => 'required|string|max:255',
-            'year' => 'string|max:255',
+            'year' => 'nullable|numeric|max:10',
             'artist' => 'required|string|max:255',
             'style' => 'required|string|max:255',
             'description' => 'required|string|max:500',

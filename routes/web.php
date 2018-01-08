@@ -13,7 +13,10 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/auctions','AuctionController@overview');
-Route::get('/auctions/sortby/{id}','AuctionController@sortAuctionBy');
+Route::get('/auctions/sortby/{option}','FilterController@sortAuctionBy');
+Route::get('/auctions/filter/{option}','FilterController@filterAuctions');
+Route::get('/auctions/filter/delete/{option}','FilterController@deleteAFilter');
+Route::get('/auctions/deleteAllFilters','FilterController@deleteAllFilters');
 Route::get('/auctions/open/{id}','AuctionController@openAuction');
 
 Auth::routes();

@@ -24,7 +24,7 @@ class AuctionController extends Controller
             $request->session()->forget('sortby');
         }        
         return view('auctions.overview',[
-            'auctions' => Auction::where('status','active')->get(),
+            'auctions' => Auction::where('status','active')->simplePaginate(1),
         ]);
     }
     

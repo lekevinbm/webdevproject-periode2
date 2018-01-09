@@ -180,20 +180,25 @@
         </div>
                 
     </div>
-    @foreach ($auctions as $key => $auction)                   
-        {{ csrf_field() }}
-        <div class="col-md-3">                           
-            <div class="row">
-                <a href="/auctions/open/{{ $auction->auction_id }}"><img style="width:100px" src="{{ $auction->photos()->where('type', 'Artwork Image')->first()['path'] }}"></a>
+    <div class="container">
+        @foreach ($auctions as $key => $auction)                   
+            {{ csrf_field() }}
+            <div class="col-md-3">                           
+                <div class="row">
+                    <a href="/auctions/open/{{ $auction->auction_id }}"><img style="width:100px" src="{{ $auction->photos()->where('type', 'Artwork Image')->first()['path'] }}"></a>
+                </div>
+                <div class="row">
+                    <p>{{ $auction->year }}, {{ $auction->artist }}</p>
+                    <p>{{ $auction->title }}</p>
+                    <p>&euro; {{ $auction->minEstimatePrice }}</p>
+                    <p> {{ date('j\d G\u i\m',strtotime($auction->endDateTime) - strtotime(Carbon::now())) }} </p>
+                    <a class="btn btn-primary" href="/auctions/open/{{$auction->auction_id}}" >Visit Auction</a>
+                </div>
             </div>
-            <div class="row">
-                <p>{{ $auction->year }}, {{ $auction->artist }}</p>
-                <p>{{ $auction->title }}</p>
-                <p>&euro; {{ $auction->minEstimatePrice }}</p>
-                <p> {{ date('j\d G\u i\m',strtotime($auction->endDateTime) - strtotime(Carbon::now())) }} </p>
-                <a class="btn btn-primary" href="/auctions/open/{{$auction->auction_id}}" >Visit Auction</a>
-            </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
+    <div class="row">
+        {{ $auctions->links() }}
+    </div>    
 </div>
 @endsection

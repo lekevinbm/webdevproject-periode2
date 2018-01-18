@@ -100,6 +100,34 @@
                     @endif
                 </p>
             </div>
+            <div id="mediaFilter">
+                <p>Media</p>
+                <p>
+                    <a href="/auctions/filter/media-Design">Design</a>
+                    @if (session('filter.media.Design'))
+                        <a href="/auctions/deleteFilter/media-Design">delete filter</a>                    
+                    @endif
+                </p>
+                <p><a href="/auctions/filter/media-Paintings_and_Works_on_Paper">Paintings and Works on Paper</a>
+                    @if (session('filter.media.Paintings_and_Works_on_Paper'))
+                        <a href="/auctions/deleteFilter/media-Paintings_and_Works_on_Paper">delete filter</a>
+                    @endif
+                </p>
+                <p><a href="/auctions/filter/media-Photographs">Photographs</a>
+                    @if (session('filter.media.Photographs'))
+                        <a href="/auctions/deleteFilter/media-Photographs">delete filter</a>
+                    @endif</p>
+                <p><a href="/auctions/filter/media-Prints_and_Multiples">Prints and Multiples</a>
+                    @if (session('filter.media.Prints_and_Multiples'))
+                        <a href="/auctions/deleteFilter/media-Prints_and_Multiples">delete filter</a>
+                    @endif
+                </p>
+                <p><a href="/auctions/filter/media-Sculpture">Sculpture</a>
+                    @if (session('filter.media.Sculpture'))
+                        <a href="/auctions/deleteFilter/media-Sculpture">delete filter</a>
+                    @endif
+                </p>
+            </div>
                     
         </div>
         <div class="col-md-3">

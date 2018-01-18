@@ -78,7 +78,6 @@
                     <ul class="nav navbar-nav">
                         <li><a href="/">HOME</a></li>
                         <li><a href="/auctions">ART</a></li>
-                        <li><a href="/isearch">ISEARCH</a></li>
                         <li><a href="/auctions/myauctions">MYAUCTIONS</a></li>
                         <li><a href="/bids/mybids">MYBIDS</a></li>
                         <li><a href="/contact">CONTACT</a></li>

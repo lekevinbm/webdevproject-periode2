@@ -19,6 +19,7 @@ class CreateAuctionsTable extends Migration
             $table->string('title');
             $table->integer('year')->nullable();
             $table->string('artist')->nullable();
+            $table->string('media');
             $table->string('style');
             $table->string('description');
             $table->string('condition');

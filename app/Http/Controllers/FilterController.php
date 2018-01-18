@@ -200,9 +200,34 @@ class FilterController extends Controller
             $continueFilter  = true; 
         }
 
+        if ( $filterOption[0] == 'media'){
+            $request->session()->put('filter.media.'.$filterOption[1],true);
+            $searchableMedia = str_replace('_',' ', $filterOption[1]);
+            if($index == 0){
+                $auctions->where('media', $searchableMedia);
+                $index++;
+            }else{
+                $auctions->orwhere('media', $searchableMedia);
+            }
+            $continueFilter  = true;
+        }
+
+        if ( session('filter.media')){
+            foreach (session('filter.media') as $key => $sessionValue){
+                $searchableMedia = str_replace('_',' ', $key);
+                if($index == 0){
+                    $auctions->where('media', $searchableMedia);
+                    $index++;
+                } else{
+                    $auctions->orwhere('media', $searchableMedia);
+                }                                      
+            }
+            $continueFilter  = true; 
+        }
+
         if($continueFilter ){
             return view('auctions.overview',[
-                'auctions' => $auctions->get(),
+                'auctions' => $auctions->simplePaginate(15),
             ]);
         }
         return redirect('/auctions');         
@@ -244,6 +269,10 @@ class FilterController extends Controller
         if ( $filterOption[0] == 'style'){
             $request->session()->forget('filter.style.'.$filterOption[1]);
         }
+
+        if ( $filterOption[0] == 'media'){
+            $request->session()->forget('filter.media.'.$filterOption[1]);
+        }
         
         if(!session('filter.price.between')){
             $request->session()->forget('filter.price.between');
@@ -262,6 +291,10 @@ class FilterController extends Controller
 
         if(!session('filter.style')){
             $request->session()->forget('filter.style');
+        }
+
+        if(!session('filter.media')){
+            $request->session()->forget('filter.media');
         }
 
         if(!session('filter')){

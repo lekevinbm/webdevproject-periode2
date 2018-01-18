@@ -22,6 +22,6 @@ class Auction extends Model
     }
 
     public function bids(){
-        return $this->hasMany('App\Bid', 'auction_id');
+        return $this->hasMany('App\Bid', 'auction_id')->orderBy('bidPrice','desc');
     }
 }

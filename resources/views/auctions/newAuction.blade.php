@@ -19,6 +19,20 @@
                     @endif
                     <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/auctions/add">
                         {{ csrf_field() }}
+                        <div class="form-group{{ $errors->has('media') ? ' has-error' : '' }}">
+                            <label for="media" class="col-md-4 control-label">Media</label>
+
+                            <div class="col-md-6">
+                                <select id="media" class="form-control" name="media" required autofocus>
+                                    <option>Choose a Media</option>
+                                    <option value="Design">Design</option>
+                                    <option value="Paintings and Works on Paper">Paintings and Works on Paper</option>
+                                    <option value="Photographs">Photographs</option>
+                                    <option value="Prints and Multiples">Prints and Multiples</option>
+                                    <option value="Sculpture">Sculpture</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
                             <label for="style" class="col-md-4 control-label">Style</label>

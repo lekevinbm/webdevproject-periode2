@@ -24,7 +24,7 @@ class AuctionController extends Controller
             $request->session()->forget('sortby');
         }        
         return view('auctions.overview',[
-            'auctions' => Auction::where('status','active')->simplePaginate(1),
+            'auctions' => Auction::where('status','active')->simplePaginate(15),
         ]);
     }
     
@@ -59,8 +59,9 @@ class AuctionController extends Controller
 
         $validator = Validator::make($data->all(), [
             'title' => 'required|string|max:255',
-            'year' => 'nullable|numeric|max:10',
+            'year' => 'nullable|numeric|max:'.date("Y"),
             'artist' => 'required|string|max:255',
+            'media' => 'required|string|max:255',
             'style' => 'required|string|max:255',
             'description' => 'required|string|max:500',
             'condition' => 'required|string|max:500',
@@ -68,7 +69,7 @@ class AuctionController extends Controller
             'width' => 'required|numeric|min:0',
             'height' => 'required|numeric|min:0',
             'depth' => 'nullable|numeric|min:0',
-            'endDateTime' => 'required|date',
+            'endDateTime' => 'required|date|after:tomorrow',
             'minEstimatePrice' => 'required|numeric|min:0',
             'maxEstimatePrice' => 'required|numeric|min:0',
             'buyOutPrice' => 'nullable|numeric|min:0',
@@ -82,6 +83,7 @@ class AuctionController extends Controller
             $auction->title = $data['title'];            
             $auction->year = $data['year'];
             $auction->artist = $data['artist'];
+            $auction->media = $data['media'];
             $auction->style = $data['style'];
             $auction->description = $data['description'];
             $auction->condition = $data['condition'];

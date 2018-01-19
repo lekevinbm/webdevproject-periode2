@@ -1,0 +1,17 @@
+{
+    "Register":"Registreren",
+    "WATCHLIST":"KIJKLIJST",
+    "PROFILE":"PROFIEL",
+    "LOGOUT":"UITLOGGEN",
+    "ART":"KUNST",
+    "MYAUCTIONS":"MIJNVEILINGEN",
+    "MYBIDS":"MIJNBIEDINGEN",
+    
+    "This is our homepage.": "Dit is onze homepagina.",
+
+    "My Auctions":"Mijn Veilingen",
+    "ADD NEW AUCTION":"VEILING TOEVOEGEN",
+    "Active auctions":"Actieve velingen",
+    "Expired auctions":"Verlopen veilingen",
+    "Sold auctions":"Verkochte veilingen"
+}

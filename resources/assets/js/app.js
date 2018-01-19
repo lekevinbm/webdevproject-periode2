@@ -7,16 +7,14 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
+$("#toggleFilter").click(function() {
+    if($('#filter').css('display') == 'none'){
+        $("#filter").slideDown();
+        $('#filterarrow').removeClass("fa-arrow-circle-right");
+        $('#filterarrow').addClass( "fa-arrow-circle-down" );        
+    }else{
+        $("#filter").slideUp();
+        $('#filterarrow').removeClass("fa-arrow-circle-down");
+        $('#filterarrow').addClass( "fa-arrow-circle-right" );
+    }    
 });

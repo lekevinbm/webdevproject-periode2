@@ -227,7 +227,7 @@ class FilterController extends Controller
 
         if($continueFilter ){
             return view('auctions.overview',[
-                'auctions' => $auctions->simplePaginate(15),
+                'auctions' => $auctions->simplePaginate(16),
             ]);
         }
         return redirect('/auctions');         

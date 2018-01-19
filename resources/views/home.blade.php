@@ -1,16 +1,10 @@
 @extends('layouts.app')
+@section('pagetitle')
+    <title>Landoretti Art</title>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Homepage</div>
-
-                    Hier moeten mooie afbeeldingen komen
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="header">
+    <img src="{{ asset('storage/header.jpg') }}" alt="Art by Landoretti">    
 </div>
 @endsection

@@ -24,7 +24,7 @@ class AuctionController extends Controller
             $request->session()->forget('sortby');
         }        
         return view('auctions.overview',[
-            'auctions' => Auction::where('status','active')->simplePaginate(15),
+            'auctions' => Auction::where('status','active')->simplePaginate(16),
         ]);
     }
     
@@ -126,7 +126,7 @@ class AuctionController extends Controller
      */
     public function saveAuctionImage($image,$auction_id, $type, $data){
         $photo = new Photo;
-        $img = Image::make($image);
+        $img = Image::make($image)->encode('jpg', 75);
         $img = $img->resize(400, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();

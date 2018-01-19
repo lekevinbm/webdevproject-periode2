@@ -10,8 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//test--> to delete
-Route::get('/mail', 'HomeController@mail');
+Route::get('/lang/{locale}', 'HomeController@setLanguage');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/auctions','AuctionController@overview');

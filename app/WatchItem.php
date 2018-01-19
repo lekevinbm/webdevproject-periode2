@@ -14,6 +14,6 @@ class WatchItem extends Model
     }
 
     public function auction(){
-        return $this->belongsTo('App\auction','auction_id');
+        return $this->belongsTo('App\Auction','auction_id');
     }
 }

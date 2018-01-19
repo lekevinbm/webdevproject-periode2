@@ -25,7 +25,7 @@ class BidController extends Controller
      */
     public function addBid(Request $data, $auction_id){
         if ($this->isAuctionForSale($auction_id)){
-            $highestBid = $this->giveHighestBid();
+            $highestBid = $this->giveHighestBid($auction_id);
             $validator = Validator::make($data->all(), [
                 'bid' => 'required|numeric|min:0'
             ]);
@@ -55,8 +55,8 @@ class BidController extends Controller
         return redirect('/');
     }
 
-    public function giveHighestBid(){
-        return Bid::orderBy('bidPrice', 'desc')->take(1)->first();
+    public function giveHighestBid($auction_id){
+        return Auction::find($auction_id)->bids()->orderBy('bidPrice', 'desc')->take(1)->first();
     }
 
     public function isAuctionForSale($auction_id){
